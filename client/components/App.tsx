@@ -1,10 +1,25 @@
+import { Outlet } from 'react-router-dom'
+
+import Header from './Header'
+import Login from './Login'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+
 function App() {
   return (
     <>
-      <header className="header">
-        <h1>My Collection</h1>
-      </header>
-      <section className="main">{/* add your code here */}</section>
+      <Header />
+      {/* <div> */}
+        <IfNotAuthenticated>
+          <Login />
+        </IfNotAuthenticated>
+
+        <IfAuthenticated>
+          {/* <Routes>
+            <Route path="/" element={<Home />} />
+          </Routes> */}
+          <Outlet/>
+        </IfAuthenticated>
+      {/* </div> */}
     </>
   )
 }
