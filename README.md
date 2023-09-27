@@ -1,4 +1,4 @@
-# Lost and Found
+# 🐱 Lost and Found 🐶
 
 ## Sprint 7 Large group project
 
