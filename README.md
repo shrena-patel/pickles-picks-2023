@@ -1,96 +1,118 @@
-# Fullstack Collection App
+# Lost and Found
 
-This repo is designed to provide space to code a fullstack app. It contains node modules and folders for databases, routes, API requests and React components that'll use React Query. Let's get going!
+## Sprint 7 Large group project
+
+The focus of this app is to practice using the full stack we teach in a large scale app.
+
+The idea of the app is to create a "billboard" style site for people to post about their animals that have gone missing, and for people who have found stray animals to post about them.
+
+The hope is that within a small community this could be a great go-to for making sure those run-away floofs make it home safely.
+
+## The Tech
+
+A Boilerplate is already set up for you with everything you will need to get started. This boilerplate is set up to use:
+
+* [React](https://reactjs.org/docs/getting-started.html)
+* [React Query](https://tanstack.com/query/v3/docs/react/overview)
+* [Express](https://expressjs.com/en/api.html)
+* [Knex.js](https://knexjs.org/)
+* [Auth0](https://www.auth0.com)
+
+## User Stories
+
+### MVP
+
+As a non-registered user:
+  * I want to register for the App under my name
+  * I want to browse all of the "Found" animals on the site.
+  * I want to to view a list of "Lost" animals posted to the site.
+  * I want to sort the "Lost" or Found" animals by species. (such as Cat / Dog)
+
+As a registered user:
+  * I want to see the contact information for the user that has found an animal that is mine.
+  * I want to be able to inform a user that their "Found" animal is mine through the app, and provide them with contact information of my own.
+  * I want to be able to post about a Lost animal that I have "Found"
+  * I want to be able to post about an animal of my own that has been "Lost"
+
+### Stretch
+
+As an unregistered user:
+  * I want to be able to see a list of all the Animals that have been "Found" after being posted as lost within the site, to give me hope <3
+
+As a registered user:
+  * I want to be able to remove a lost animal that I have posted, as it has been "Found" / Mark it as found.
+  * I want to be able to edit a post I have made about a Lost animal of mine
+  * I want to be able to edit a post I have made about a Found animal of mine
+
+  ---
+
+## Views (Client Side)
+  | name | purpose |
+  | --- | --- |
+  | Login | Welcome unregistered users and encourage them to login / sign up |
+  | Home | Welcome registered users and display links to pet pages |
+  | FoundPets | View the pets that users have found |
+  | FoundForm | For a registered user to add a pet that they have found |
+  | LostPets | View the pets that users have reported as lost |
+  | LostForm | For a registered user to add a pet that they have lost |
+
+
+## API (Client - Server)
+
+| Method | Endpoint | Protected | Usage | Response |
+| --- | --- | --- | --- | --- |
+| Get | /api/lost | No | Get the list of lost pets | Array of Objects (object = A Lost Pet) |
+| Get | /api/found | No | Get the list of found pets | Array of Objects (object = A Found Pet) |
+| Post | /api/lost | Yes | Add a Lost pet to the db | The Pet that was added (as an object) |
+| Post | /api/found | Yes | Add a Found pet to the db | The Pet that was added (as an object) |
+
+## DB (Server Side) -
+  There should be two tables for MVP. You may want/need to add additional columns or tables.
+
+### Lost
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | id | Integer | Unique identifier for each lost animal |
+  | name | String | Name of Lost animal, because names are special <3 |
+  | species | String | What kind of animal is it? |
+  | photo | String | URL of a picture of the lost animal |
+  | user_id | String | Auth0 id (aka `sub`) of the user who reported the animal as lost |
+  | user_name | String | Name of the user who reported the animal as lost |
+  | user_contact | String | Contact email of the user who reported the animal as lost |
+
+### Found
+  | Column Name | Data Type | Purpose |
+  | --- | --- | --- |
+  | id | Integer | Unique identifier for each found animal |
+  | species | String | What kind of animal is it? |
+  | photo | string | URL of a picture of the found animal |
+  | user_id | String | Auth0 id (aka `sub`) of the user who found the animal |
+  | user_name | String | Name of the user who reported the found animal |
+  | user_contact | String | Contact email of the user who reported the found animal |
+
+## Authentication
+
+Authentication is already set up in the client side of this project using Auth0. Users are currently able to login and logout.
+
+When you wish to protect your server side routes (those for registered users only), you may need to reference other exercises or materials.
+
+If you wish to replace the Auth0 authentication with your own, so you can customise the login for example, you will need to update the `client/index.tsx` file of the project with your own Auth0 details.
 
 ## Setup
 
-### 0. Cloning and installation
+Run the following commands in your terminal:
 
-- [ ] Clone this repo, navigate to it, install packages, and start the server with `npm run dev`
-  <details style="padding-left: 2em">
-    <summary>Tip</summary>
+```sh
+npm install
+npm run dev
+```
 
-    You may also want to start a new branch
-    ```sh
-    cd my-fullstack-collection
-    npm i
-    git checkout -b <branchname>
-    npm run dev
-    ```
-  </details>
-
-<details>
-  <summary>More about using <code>npm</code> vs <code>npx</code></summary>
-
-  - When running knex, run `npm run knex <command>`, e.g. `npm run knex migrate:latest` rather than using `npx`
-</details>
+To run before merging:
+```sh
+npm run lint
+npm run format
+npm run test
+```
 
 ---
-
-## Requirements
-
-### 1. Choosing your data set
-
-- [ ] First, decide what you would like to keep a collection of. This could be a repo for keeping track of movies, books, gifs, cars, rocks, anything you fancy, but keep it simple!
-  <details style="padding-left: 2em">
-    <summary>More about your collection</summary>
-
-    **Note:** the aim is to have some simple data. If you think you might need more than one database table, or have lots of details you want to store, how could you simplify the information you're keeping track of? Leave more complex data until later in the project. For example, I want to keep track of books that I want to read, ones that I have read, and ones that I own. To start with though, let's keep track of the books themselves. My data might look like:
-
-    |id|title|author|
-    |---|---|---|
-    | 1 | Ready Player One | Ernest Cline |
-    | 2 | Throwing Rocks at the Google Bus | Douglas Rushkoff |
-
-Our first job is getting something showing on the front end from our database. Here's a list of steps in case they are useful. You can build in any order you like though ;)
-
-## Back end
-
-### 2. Building the database
-
-- [ ] Design a database to store a list of your things (e.g. books)
-- [ ] Build the migrations and seed data
-
-### 3. Building the API
-- [ ] Build an API (back end route) to get the information from your database
-- [ ] Test your API with Insomnia
-
-## Front end
-
-### 4. Setting the stage
-- [ ] Build a React component with static html
-
-### 5. Building the API client
-- [ ] Build an API client in the front end to request the information from your routes
-
-### 6. Querying Data 
-- [ ] Write a query with the `useQuery` hook to fetch the collection data from the API
-- [ ] Display the collection data you queried in a component (you may want to create a new component for this)
-
-### 7. Create Data
-- [ ] (Optional) Create a new component for your new collection item form
-- [ ] Mutate data with the `useMutation` hook to create a new collection item via the API 
-
-### 8. Delete Data
-- [ ] Mutate data with the `useMutation` hook to delete an exisiting collection item via the API (you may want to add this to your collection display component)
-
-### 9. Update Data
-- [ ] (Optional) Create a new component for your update collection item form
-- [ ] Mutate data with the `useMutation` hook to update an exisiting collection item via the API 
-
----
-
-## Stretch
-
-<details>
-  <summary>More about stretch challenges</summary>
-  
-  - Forms can be tough to build accessibly. First ensure all parts of your form can be reached and used with keyboard-only navigation. Then test your form page with the WAVE browser extension, and fix any accessibility issues it detects
-  - Is there any complex data you chose to not include earlier or any way you could expand this dataset?
-    - You might have some other information (e.g. unread books vs. read books) that should be included in your database design, and this may require adjusting your database design
-  - Could you add an external API (maybe an inspirational quote in the footer?)
-  - If you haven't already, CSS!
-</details>
-
----
-[Provide feedback on this repo](https://docs.google.com/forms/d/e/1FAIpQLSfw4FGdWkLwMLlUaNQ8FtP2CTJdGDUv6Xoxrh19zIrJSkvT4Q/viewform?usp=pp_url&entry.1958421517=my-fullstack-collection-query)
+[Provide feedback on this repo](https://docs.google.com/forms/d/e/1FAIpQLSfw4FGdWkLwMLlUaNQ8FtP2CTJdGDUv6Xoxrh19zIrJSkvT4Q/viewform?usp=pp_url&entry.1958421517=lost-and-found)
