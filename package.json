@@ -2,7 +2,7 @@
   "name": "lost-and-found",
   "type": "module",
   "version": "0.1.0",
-  "description": "Lost and Found",
+  "description": "Pickle's Picks",
   "repository": "https://https://github.com/dev-academy-challenges/my-fullstack-collection-query",
   "main": "server/index.ts",
   "scripts": {
