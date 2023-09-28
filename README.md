@@ -1,4 +1,4 @@
-# 🐱 Lost and Found 🐶
+# 🐶 Pickle's Picks 🐶
 
 ## Sprint 7 Large group project
 
