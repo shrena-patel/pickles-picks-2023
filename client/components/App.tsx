@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom'
+import { Outlet } from "react-router-dom"
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Header from './Header'
 import Login from './Login'
@@ -8,11 +8,11 @@ function App() {
   return (
     <>
       <Header />
-      <IfNotAuthenticated>
+            <IfNotAuthenticated>
         <Login />
       </IfNotAuthenticated>
 
-      <IfAuthenticated>
+          <IfAuthenticated>
         <Outlet />
       </IfAuthenticated>
     </>
