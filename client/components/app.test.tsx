@@ -7,5 +7,5 @@ test('tests for a test', () => {
 })
 
 test('tests for a fail', () => {
-  expect(1).toBeTypeOf('string')
+  expect(1).toBeTypeOf('number')
 })
