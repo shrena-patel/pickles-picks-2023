@@ -6,7 +6,7 @@ The focus of this app is to practice using the Full Stack we teach, (with auth i
 
 The idea of the app is to create a blog style site for [Pickle](https://www.instagram.com/pickleapproves/) to post about places they have eaten at and review them, and for people who follow Pickle to be able to save places for them to eat at later.
 
-As she grows in popularity, Pickle hopes to make the world (or at least Wellington) a more dog-friendly place! Not just dog-tolerant.
+As she grows in popularity, Pickle hopes to make the world a more dog-friendly place! Not just dog-tolerant.
 
 ## The Tech
 
